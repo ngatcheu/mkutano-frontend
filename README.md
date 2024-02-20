@@ -1,13 +1,66 @@
-Tout menbre de groupe dans créer sa feature selon le model suivant: feature_DITXX chez moi jai feature_DIT01
-Etant sur votre branche : feature_DIT-XX
+# code-frontend 
 
-1 - git pull origin develop
+This project uses Quarkus, the Supersonic Subatomic Java Framework.
+This is the demo project present Qute template
+If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
-Vous effectuez vos modification ensuite sur votre branche puis :
+## Running the application in dev mode
 
-2 - git  add  .
-3 - git  commit  -m  "DIT_XX  votre message qui decrit vos ajouts"
-4 - git push ou  git push --set-upstream origin feature_DITXX
+You can run your application in dev mode that enables live coding using:
+```shell script
+./mvnw compile quarkus:dev
+```
 
-Une fois que vous êtes sure que votre code compil bien avec vos ajout intégrés a ceux recuperes en ligne sur la branche develop,
-Vous ouvrez une merge request de votre branche vers la branche develop.
+> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+
+## Packaging and running the application
+
+The application can be packaged using:
+```shell script
+./mvnw package
+```
+It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
+Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+
+The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+
+If you want to build an _über-jar_, execute the following command:
+```shell script
+./mvnw package -Dquarkus.package.type=uber-jar
+```
+
+The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+
+## Creating a native executable
+
+You can create a native executable using: 
+```shell script
+./mvnw package -Dnative
+```
+
+Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
+```shell script
+./mvnw package -Dnative -Dquarkus.native.container-build=true
+```
+
+You can then execute your native executable with: `./target/code-frontend-1.0.0-SNAPSHOT-runner`
+
+If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
+
+## Related Guides
+
+- REST Client Reactive ([guide](https://quarkus.io/guides/rest-client-reactive)): Call REST services reactively
+
+## Provided Code
+
+### RESTEasy Reactive
+
+Easily start your Reactive RESTful Web Services
+
+[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+
+### RESTEasy Reactive Qute
+
+Create your web page using Quarkus RESTEasy Reactive & Qute
+
+[Related guide section...](https://quarkus.io/guides/qute#type-safe-templates)
