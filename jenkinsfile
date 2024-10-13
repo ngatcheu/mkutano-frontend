@@ -1,18 +1,9 @@
 pipeline {
     agent {
-        label "master"  // Define the Jenkins agent with a label 'master'
+        docker { image 'maven:3.9.3-eclipse-temurin-17'
+         args '-v $HOME/.m2:/root/.m2' }
     }
-    tools {
-        maven "maven3"  // Specify Maven tool version as configured in Jenkins
-    }
-    environment {
-        // Set environment variables used in the pipeline
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "http://194.164.195.239:8081/"
-        NEXUS_REPOSITORY = "release"
-        NEXUS_CREDENTIAL_ID = "nexus"
-    }
+
     stages {
         stage("Clone code from VCS") {
             steps {
