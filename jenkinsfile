@@ -1,0 +1,50 @@
+pipeline {
+    agent {
+        label "master"  // Define the Jenkins agent with a label 'master'
+    }
+    tools {
+        maven "maven3"  // Specify Maven tool version as configured in Jenkins
+    }
+    environment {
+        // Set environment variables used in the pipeline
+        NEXUS_VERSION = "nexus3"
+        NEXUS_PROTOCOL = "http"
+        NEXUS_URL = "http://194.164.195.239:8081/"
+        NEXUS_REPOSITORY = "release"
+        NEXUS_CREDENTIAL_ID = "nexus"
+    }
+    stages {
+        stage("Clone code from VCS") {
+            steps {
+                script {
+                    // Clone the Git repository from a specific branch
+                    git branch: 'feature/sprint2',
+                        url: 'https://github.com/ngatcheu/mkutano-frontend.git'
+                        // Uncomment and specify credentials if the repository is private
+                        //, credentialsId: 'your-credentials-id'
+                }
+            }
+        }
+
+        stage('Test') {
+
+            steps {
+                sh 'mvn clean verify'
+            }
+        }
+
+        stage("Maven Build package") {
+            steps {
+                script {
+                    // Run Maven package command without executing tests
+                    sh "mvn package -DskipTests=true"
+                }
+            }
+        }
+        stage("Publish to Nexus Repository Manager") {
+            steps {
+                /sh 'mvn deploy -P release-profile --settings ./.m2/settings.xml'
+            } 
+        }
+    }
+}

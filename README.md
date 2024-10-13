@@ -64,3 +64,8 @@ Easily start your Reactive RESTful Web Services
 Create your web page using Quarkus RESTEasy Reactive & Qute
 
 [Related guide section...](https://quarkus.io/guides/qute#type-safe-templates)
+
+#### Pour pousser l'artefact snapshot sur nexus avec les configurations de ton settings
+mvn deploy -s .m2/settings.xml
+
+#### Pour pousser l'artefact release , modifier manuellement le pom en enlevant '-SNAPSHOT' au niveau de la version
